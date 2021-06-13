@@ -32,9 +32,28 @@ document.getElementById('btn-get-authors').addEventListener('click', () => {
 		});
 });
 
+const headers= new Headers();
+headers.append('Content-type','application/json');
+const options={
+method:'POST',
+headers,
+body:JSON.stringify({
+
+ firstName:'',
+ 
+ idBook:0,
+ lastName:'',
+ 
+}
+)
+};
 
 document.getElementById('add-add-author').addEventListener('click', event => {
 	event.preventDefault();
+	let newFetch = fetch('https://fakerestapi.azurewebsites.net/api/v1/Authors',options).then(response=>{
+return response.json()
+}
+).then(data=> {
 	let inputValue1 = document.getElementById("first-name").value;
   let inputValue2 = document.getElementById("last-name").value;
  let inputValue3 = document.getElementById("book-id").value;
@@ -48,4 +67,4 @@ document.getElementById('add-add-author').addEventListener('click', event => {
 					   </h4>
 					   <button class="btn-delete">Delete Author</button>
 				   </div>`);
-   });
+})});
